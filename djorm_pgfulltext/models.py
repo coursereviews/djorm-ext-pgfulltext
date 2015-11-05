@@ -279,9 +279,10 @@ class SearchQuerySet(QuerySet):
 
         if query:
             function = "to_tsquery" if raw else "plainto_tsquery"
-            ts_query = "%s('%s', '%s')" % (
+            ts_query = "%s('%s', %s)" % (
                 function,
                 config,
+                # adapt quotes the query
                 psycopg2.extensions.adapt(force_text(query))
             )
 
